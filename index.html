@@ -1,0 +1,1768 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MathMaster — Tables Training Arena</title>
+    <meta
+      name="description"
+      content="Master multiplication tables from 1 to 30 with randomized practice, timed challenges, progress tracking, squares, and cubes. Practice Smart. Calculate Fast."
+    />
+    <meta name="theme-color" content="#07090e" />
+    <link rel="canonical" href="https://your-domain.com/" />
+
+    <!-- Open Graph: Facebook, LinkedIn, Discord, WhatsApp, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MathMaster" />
+    <meta property="og:title" content="MathMaster — Tables Training Arena" />
+    <meta
+      property="og:description"
+      content="Practice Smart. Calculate Fast. Master multiplication tables with custom ranges, timed challenges, and progress tracking."
+    />
+    <meta property="og:url" content="https://your-domain.com/" />
+    <meta property="og:image" content="https://your-domain.com/og-image.png" />
+    <meta
+      property="og:image:secure_url"
+      content="https://your-domain.com/og-image.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="MathMaster Tables Training Arena — Practice Smart. Calculate Fast."
+    />
+
+    <!-- Twitter / X link preview -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MathMaster — Tables Training Arena" />
+    <meta
+      name="twitter:description"
+      content="Master multiplication tables with randomized practice, timed challenges, and progress tracking."
+    />
+    <meta name="twitter:image" content="https://your-domain.com/og-image.png" />
+    <meta
+      name="twitter:image:alt"
+      content="MathMaster Tables Training Arena — Practice Smart. Calculate Fast."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              darkBg: "#030712",
+              cardBg: "#090d16",
+              cardHover: "#111827",
+              accentBlue: "#3b82f6",
+              accentViolet: "#8b5cf6",
+              successGreen: "#10b981",
+              dangerRed: "#ef4444",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #030712;
+      }
+      .glow-blue {
+        box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.25);
+      }
+      .glow-violet {
+        box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.25);
+      }
+      .glow-success {
+        box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #030712;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1f2937;
+        border-radius: 3px;
+      }
+
+      /* Refined dark product UI — deliberately avoids default component-library styling */
+      :root {
+        color-scheme: dark;
+        --ink: #e8edf7;
+        --muted: #8995aa;
+        --line: rgba(148, 163, 184, 0.13);
+        --panel: #0b101a;
+      }
+      body {
+        background:
+          radial-gradient(
+            ellipse at 15% -15%,
+            rgba(48, 66, 115, 0.22),
+            transparent 38%
+          ),
+          #05070c !important;
+        color: var(--ink);
+        letter-spacing: -0.012em;
+      }
+      header {
+        background: rgba(5, 7, 12, 0.88) !important;
+        border-color: var(--line) !important;
+      }
+      main {
+        max-width: 1320px !important;
+      }
+      .tab-content > div,
+      .tab-content .bg-cardBg {
+        box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+      }
+      .bg-cardBg {
+        background: linear-gradient(
+          145deg,
+          rgba(15, 21, 33, 0.96),
+          rgba(9, 13, 21, 0.98)
+        ) !important;
+        border-color: var(--line) !important;
+      }
+      button,
+      input,
+      select {
+        transition:
+          border-color 0.18s ease,
+          background 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      button {
+        letter-spacing: -0.01em;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible {
+        outline: 2px solid #8b9cff;
+        outline-offset: 3px;
+      }
+      .tab-content .rounded-3xl {
+        border-radius: 22px !important;
+      }
+      .tab-content .rounded-2xl {
+        border-radius: 16px !important;
+      }
+      .tab-content button:hover {
+        transform: translateY(-1px);
+      }
+      .power-lab {
+        margin: 28px 0;
+        padding: 26px;
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 24px;
+        background: linear-gradient(
+          120deg,
+          rgba(15, 22, 35, 0.96),
+          rgba(8, 12, 20, 0.98)
+        );
+      }
+      .power-lab-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .power-lab-heading h3 {
+        font-size: clamp(1.25rem, 2vw, 1.65rem);
+        font-weight: 750;
+        color: #f4f6fb;
+        letter-spacing: -0.04em;
+        margin: 3px 0 5px;
+      }
+      .power-lab-heading p:not(.eyebrow) {
+        color: #8d9ab0;
+        font-size: 0.9rem;
+      }
+      .eyebrow {
+        color: #8b9cff;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+      }
+      .lab-mark {
+        border: 1px solid rgba(129, 140, 248, 0.24);
+        background: rgba(99, 102, 241, 0.09);
+        color: #b5baff;
+        border-radius: 14px;
+        padding: 12px 14px;
+        font:
+          700 1rem ui-monospace,
+          monospace;
+      }
+      .power-cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .power-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        min-width: 0;
+        text-align: left;
+        padding: 20px;
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        border-radius: 18px;
+        background: #090e17;
+        color: #f3f5fa;
+      }
+      .power-card:hover {
+        border-color: rgba(129, 140, 248, 0.55);
+        background: #0e1522;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+      }
+      .power-symbol {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        font-size: 1.35rem;
+        font-weight: 800;
+      }
+      .square-card .power-symbol {
+        color: #9fc5ff;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+      .cube-card .power-symbol {
+        color: #d0b4ff;
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+      }
+      .power-card-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+      }
+      .power-card-copy strong {
+        font-size: 1rem;
+        font-weight: 750;
+      }
+      .power-card-copy small {
+        font-size: 0.78rem;
+        color: #8995aa;
+      }
+      .power-arrow {
+        color: #78859a;
+        font-size: 1.25rem;
+      }
+      @media (max-width: 640px) {
+        .power-lab {
+          padding: 18px;
+        }
+        .power-lab-heading {
+          align-items: flex-start;
+        }
+        .power-cards {
+          grid-template-columns: 1fr;
+        }
+        .power-card {
+          padding: 15px;
+        }
+      }
+
+      /* Precision outline system: quiet surfaces, crisp borders, restrained accent */
+      :root {
+        --outline-bg: #07090e;
+        --outline-panel: #0a0d13;
+        --outline-panel-raised: #0d1119;
+        --outline-stroke: #252c39;
+        --outline-stroke-strong: #394456;
+        --outline-text: #f1f5fb;
+        --outline-muted: #8b96a8;
+        --outline-accent: #a5b4fc;
+      }
+      html {
+        background: var(--outline-bg);
+      }
+      body {
+        background: var(--outline-bg) !important;
+        color: var(--outline-text);
+        letter-spacing: -0.018em;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(148, 163, 184, 0.025) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(148, 163, 184, 0.025) 1px,
+            transparent 1px
+          );
+        background-size: 36px 36px;
+        mask-image: linear-gradient(to bottom, black, transparent 85%);
+      }
+      header {
+        background: rgba(7, 9, 14, 0.94) !important;
+        border-bottom: 1px solid #202633 !important;
+        box-shadow: none !important;
+      }
+      header > div {
+        max-width: 1500px !important;
+      }
+      main {
+        max-width: 1500px !important;
+      }
+      footer {
+        background: #07090e !important;
+        border-color: #202633 !important;
+      }
+      .bg-cardBg,
+      .power-lab {
+        background: var(--outline-panel) !important;
+        border: 1px solid var(--outline-stroke) !important;
+        box-shadow: none !important;
+      }
+      .power-lab {
+        border-radius: 12px !important;
+        padding: clamp(18px, 3vw, 30px) !important;
+      }
+      .power-card,
+      .power-lab .power-card {
+        background: #090c12 !important;
+        border: 1px solid #2a3240 !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+      }
+      .power-card:hover {
+        background: #0d121b !important;
+        border-color: #7885a0 !important;
+        box-shadow: inset 0 0 0 1px rgba(165, 180, 252, 0.08) !important;
+      }
+      .power-symbol {
+        border-radius: 9px !important;
+        box-shadow: none !important;
+      }
+      .tab-content .rounded-3xl,
+      .tab-content .rounded-2xl {
+        border-radius: 12px !important;
+      }
+      .tab-content > div,
+      .tab-content .bg-cardBg {
+        box-shadow: none !important;
+      }
+      .tab-content .bg-gradient-to-r,
+      .tab-content .bg-gradient-to-br {
+        background: #0a0d13 !important;
+      }
+      .tab-content [class*="border-slate-800"],
+      .tab-content [class*="border-slate-700"] {
+        border-color: #252c39 !important;
+      }
+      .tab-content [class*="shadow-2xl"],
+      .tab-content [class*="shadow-lg"],
+      .tab-content [class*="shadow-md"] {
+        box-shadow: none !important;
+      }
+      .tab-content .glow-blue,
+      .tab-content .glow-violet,
+      .tab-content .glow-success {
+        box-shadow: none !important;
+      }
+      button {
+        border-radius: 9px !important;
+        box-shadow: none !important;
+        font-weight: 650;
+      }
+      button:hover {
+        filter: brightness(1.08);
+      }
+      button:active {
+        transform: translateY(0) scale(0.99) !important;
+      }
+      .nav-btn {
+        border: 1px solid transparent !important;
+        border-radius: 8px !important;
+        color: #a5afc0 !important;
+      }
+      .nav-btn:hover {
+        background: #10151e !important;
+        border-color: #293141 !important;
+        color: #f4f6fb !important;
+      }
+      .nav-btn.bg-slate-800,
+      .nav-btn.text-white {
+        background: #121824 !important;
+        border-color: #343e50 !important;
+        color: #f4f6fb !important;
+      }
+      input,
+      select,
+      textarea {
+        background: #070a10 !important;
+        border-color: #30394a !important;
+        border-radius: 9px !important;
+        color: #f1f5fb !important;
+        box-shadow: none !important;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #8997bc !important;
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.08) !important;
+      }
+      input[type="radio"],
+      input[type="checkbox"] {
+        accent-color: #a5b4fc;
+      }
+      .power-lab-heading {
+        padding-bottom: 18px;
+        border-bottom: 1px solid #202633;
+      }
+      .power-lab-heading h3 {
+        letter-spacing: -0.045em;
+      }
+      .eyebrow {
+        color: #a5b4fc !important;
+      }
+      .lab-mark {
+        border-radius: 8px !important;
+        border-color: #30394a !important;
+        background: #0b1019 !important;
+        color: #c7d2fe !important;
+      }
+      #question-display {
+        letter-spacing: -0.055em;
+      }
+      #answer-input {
+        border-color: #343e50 !important;
+        background: #070a10 !important;
+      }
+      #answer-input:focus {
+        border-color: #a5b4fc !important;
+      }
+      ::selection {
+        background: #39466a;
+        color: #fff;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-darkBg text-slate-100 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white custom-scrollbar"
+  >
+    <header
+      class="sticky top-0 z-50 bg-darkBg/95 backdrop-blur-md border-b border-slate-800/80"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <div
+          class="flex items-center space-x-3 cursor-pointer"
+          onclick="app.switchTab('dashboard')"
+        >
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center glow-blue text-white font-black text-xl"
+          >
+            M
+          </div>
+          <div>
+            <h1
+              class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-blue-400 via-indigo-300 to-violet-400 bg-clip-text text-transparent"
+            >
+              MathMaster
+            </h1>
+            <p class="text-xs text-slate-400 hidden sm:block">
+              Tables Training Arena
+            </p>
+          </div>
+        </div>
+
+        <!-- Stats Pill & Nav Links -->
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <div
+            class="hidden md:flex items-center space-x-3 bg-cardBg border border-slate-800/80 rounded-full px-4 py-1.5 text-sm shadow-inner"
+          >
+            <div
+              class="flex items-center space-x-1 text-amber-400 font-semibold"
+              title="XP Points"
+            >
+              <i data-lucide="zap" class="w-4 h-4 fill-amber-400"></i>
+              <span id="header-xp">0 XP</span>
+            </div>
+            <span class="text-slate-700">|</span>
+            <div
+              class="flex items-center space-x-1 text-orange-400 font-semibold"
+              title="Daily Streak"
+            >
+              <i data-lucide="flame" class="w-4 h-4 fill-orange-400"></i>
+              <span id="header-streak">0d</span>
+            </div>
+            <span class="text-slate-700">|</span>
+            <div
+              class="flex items-center space-x-1 text-violet-400 font-semibold"
+              title="Level"
+            >
+              <i data-lucide="award" class="w-4 h-4"></i>
+              <span id="header-level">Lvl 1</span>
+            </div>
+          </div>
+
+          <button
+            onclick="app.switchTab('dashboard')"
+            class="nav-btn px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800/60 text-slate-300 transition flex items-center space-x-1.5"
+            data-tab="dashboard"
+          >
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Dashboard</span>
+          </button>
+          <button
+            onclick="app.switchTab('learn')"
+            class="nav-btn px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800/60 text-slate-300 transition flex items-center space-x-1.5"
+            data-tab="learn"
+          >
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Learn Tables</span>
+          </button>
+          <button
+            onclick="app.switchTab('speed')"
+            class="nav-btn px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800/60 text-slate-300 transition flex items-center space-x-1.5"
+            data-tab="speed"
+          >
+            <i data-lucide="gauge" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Speed Arena</span>
+          </button>
+          <button
+            onclick="app.switchTab('mistakes')"
+            class="nav-btn px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800/60 text-slate-300 transition flex items-center space-x-1.5 relative"
+            data-tab="mistakes"
+          >
+            <i data-lucide="book-marked" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Mistakes</span>
+            <span
+              id="mistake-badge"
+              class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden"
+              >0</span
+            >
+          </button>
+          <button
+            onclick="app.switchTab('tips')"
+            class="nav-btn px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800/60 text-slate-300 transition flex items-center space-x-1.5"
+            data-tab="tips"
+          >
+            <i data-lucide="lightbulb" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Tips</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Toast Notification Banner -->
+    <div
+      id="toast-banner"
+      class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-700 px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3"
+    >
+      <span id="toast-icon"></span>
+      <span id="toast-msg" class="text-sm font-semibold text-slate-200"></span>
+    </div>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div id="tab-dashboard" class="space-y-8 tab-content">
+        <!-- Welcome Hero -->
+        <div
+          class="relative overflow-hidden bg-gradient-to-r from-blue-950/50 via-cardBg to-violet-950/50 border border-slate-800/80 rounded-3xl p-6 sm:p-10 glow-blue shadow-2xl"
+        >
+          <div class="relative z-10 max-w-2xl">
+            <span
+              class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-blue-500/20"
+            >
+              Practice Smart. Calculate Fast. Master Mathematics.
+            </span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-white"
+            >
+              Supercharge Your Mental Math Speed
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base mb-6">
+              Master multiplication tables from 1 to 30 through adaptive
+              testing, instant mental math shortcuts, and real-time speed
+              challenges.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button
+                onclick="app.startQuickSession()"
+                class="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2"
+              >
+                <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+                <span>Quick Practice (1–20)</span>
+              </button>
+              <button
+                onclick="app.openCustomSetup()"
+                class="bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-slate-200 font-semibold px-6 py-3 rounded-xl transition flex items-center space-x-2"
+              >
+                <i data-lucide="sliders" class="w-5 h-5"></i>
+                <span>Custom Range / Setup</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weak Tables Alert Banner -->
+        <div
+          id="weak-tables-alert"
+          class="hidden bg-amber-950/20 border border-amber-600/30 rounded-2xl p-4 flex items-start space-x-4 shadow-lg"
+        >
+          <div class="p-2 bg-amber-500/20 text-amber-400 rounded-xl">
+            <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-amber-300 text-base">
+              Targeted Practice Recommended
+            </h3>
+            <p id="weak-tables-text" class="text-slate-300 text-sm mt-1"></p>
+          </div>
+          <button
+            onclick="app.startWeakTablesPractice()"
+            class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition self-center shadow"
+          >
+            Practice Weak Tables
+          </button>
+        </div>
+
+        <!-- Range Selection Cards -->
+        <div>
+          <h3
+            class="text-xl font-bold mb-4 flex items-center space-x-2 text-white"
+          >
+            <i data-lucide="target" class="text-blue-400 w-5 h-5"></i>
+            <span>Step 1: Select Your Table Range</span>
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Range 1-10 -->
+            <div
+              onclick="app.selectRange(1, 10)"
+              class="bg-cardBg hover:bg-cardHover border border-slate-800/80 hover:border-blue-500/50 rounded-2xl p-5 cursor-pointer transition group shadow-md"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                  >Beginner</span
+                >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition"
+                ></i>
+              </div>
+              <h4
+                class="text-xl font-bold group-hover:text-blue-400 transition text-white"
+              >
+                Tables 1 – 10
+              </h4>
+              <p class="text-slate-400 text-sm mt-1">
+                Foundation tables for everyday math speed.
+              </p>
+            </div>
+            <!-- Range 11-20 -->
+            <div
+              onclick="app.selectRange(11, 20)"
+              class="bg-cardBg hover:bg-cardHover border border-slate-800/80 hover:border-blue-500/50 rounded-2xl p-5 cursor-pointer transition group shadow-md"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                  >Intermediate</span
+                >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition"
+                ></i>
+              </div>
+              <h4
+                class="text-xl font-bold group-hover:text-blue-400 transition text-white"
+              >
+                Tables 11 – 20
+              </h4>
+              <p class="text-slate-400 text-sm mt-1">
+                Essential mental math for competitive exams.
+              </p>
+            </div>
+            <!-- Range 21-25 -->
+            <div
+              onclick="app.selectRange(21, 25)"
+              class="bg-cardBg hover:bg-cardHover border border-slate-800/80 hover:border-blue-500/50 rounded-2xl p-5 cursor-pointer transition group shadow-md"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold px-2.5 py-1 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20"
+                  >Advanced</span
+                >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition"
+                ></i>
+              </div>
+              <h4
+                class="text-xl font-bold group-hover:text-blue-400 transition text-white"
+              >
+                Tables 21 – 25
+              </h4>
+              <p class="text-slate-400 text-sm mt-1">
+                Advanced multiplication for high-speed calculation.
+              </p>
+            </div>
+            <!-- Range 26-30 -->
+            <div
+              onclick="app.selectRange(26, 30)"
+              class="bg-cardBg hover:bg-cardHover border border-slate-800/80 hover:border-blue-500/50 rounded-2xl p-5 cursor-pointer transition group shadow-md"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <span
+                  class="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                  >Expert</span
+                >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition"
+                ></i>
+              </div>
+              <h4
+                class="text-xl font-bold group-hover:text-blue-400 transition text-white"
+              >
+                Tables 26 – 30
+              </h4>
+              <p class="text-slate-400 text-sm mt-1">
+                Mastery level for elite math champions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Custom Range Builder -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 lg:col-span-2 flex flex-col justify-between shadow-md"
+          >
+            <div>
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="p-2.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20"
+                >
+                  <i data-lucide="sliders" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white">
+                    Custom Range & Specific Tables
+                  </h3>
+                  <p class="text-slate-400 text-xs">
+                    Choose any inclusive range from 1 to 30 or pick specific
+                    tables.
+                  </p>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1"
+                    >Starting Table (1–30)</label
+                  >
+                  <input
+                    type="number"
+                    id="custom-start"
+                    min="1"
+                    max="30"
+                    value="12"
+                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1"
+                    >Ending Table (1–30)</label
+                  >
+                  <input
+                    type="number"
+                    id="custom-end"
+                    min="1"
+                    max="30"
+                    value="19"
+                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+            <button
+              onclick="app.startCustomRangePractice()"
+              class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg"
+            >
+              <span>Start Custom Practice</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Daily Challenge Card -->
+          <div
+            class="bg-gradient-to-br from-violet-950/30 via-cardBg to-cardBg border border-violet-900/40 rounded-3xl p-6 flex flex-col justify-between shadow-md"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="bg-violet-500/10 text-violet-400 text-xs font-semibold px-3 py-1 rounded-full border border-violet-500/20"
+                  >Daily Quest</span
+                >
+                <i data-lucide="sparkles" class="w-6 h-6 text-violet-400"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2 text-white">
+                Daily Math Challenge
+              </h3>
+              <p class="text-slate-400 text-sm mb-4">
+                Complete today's curated set of 20 random questions from tables
+                1–25 to maintain your streak!
+              </p>
+              <div
+                id="daily-status"
+                class="text-xs font-semibold px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800/80 text-slate-300 mb-4 text-center"
+              >
+                Status: Available Today
+              </div>
+            </div>
+            <button
+              onclick="app.startDailyChallenge()"
+              class="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg"
+            >
+              <span>Play Daily Challenge</span>
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Powers practice: focused square and cube drills -->
+        <section class="power-lab">
+          <div class="power-lab-heading">
+            <div>
+              <p class="eyebrow">SPECIALIZED DRILLS</p>
+              <h3>Squares &amp; Cubes Lab</h3>
+              <p>
+                Build instant recall for squares and cubes with focused, timed
+                rounds.
+              </p>
+            </div>
+            <span class="lab-mark">x² / x³</span>
+          </div>
+          <div class="power-cards">
+            <button
+              onclick="app.startPowerPractice(2)"
+              class="power-card square-card"
+            >
+              <span class="power-symbol">n²</span>
+              <span class="power-card-copy"
+                ><strong>Square Sprint</strong
+                ><small>Squares from 1² to 30²</small></span
+              >
+              <span class="power-arrow">↗</span>
+            </button>
+            <button
+              onclick="app.startPowerPractice(3)"
+              class="power-card cube-card"
+            >
+              <span class="power-symbol">n³</span>
+              <span class="power-card-copy"
+                ><strong>Cube Challenge</strong
+                ><small>Cubes from 1³ to 20³</small></span
+              >
+              <span class="power-arrow">↗</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Stats & Achievements Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-2xl p-4 text-center shadow-md"
+          >
+            <p class="text-slate-400 text-xs font-medium">Tests Completed</p>
+            <p
+              id="stat-tests"
+              class="text-2xl font-extrabold text-blue-400 mt-1"
+            >
+              0
+            </p>
+          </div>
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-2xl p-4 text-center shadow-md"
+          >
+            <p class="text-slate-400 text-xs font-medium">Overall Accuracy</p>
+            <p
+              id="stat-accuracy"
+              class="text-2xl font-extrabold text-emerald-400 mt-1"
+            >
+              0%
+            </p>
+          </div>
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-2xl p-4 text-center shadow-md"
+          >
+            <p class="text-slate-400 text-xs font-medium">Best Streak</p>
+            <p
+              id="stat-streak"
+              class="text-2xl font-extrabold text-orange-400 mt-1"
+            >
+              0
+            </p>
+          </div>
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-2xl p-4 text-center shadow-md"
+          >
+            <p class="text-slate-400 text-xs font-medium">Questions Answered</p>
+            <p
+              id="stat-questions"
+              class="text-2xl font-extrabold text-violet-400 mt-1"
+            >
+              0
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="tab-setup"
+        class="hidden tab-content max-w-2xl mx-auto space-y-6"
+      >
+        <div class="flex items-center justify-between">
+          <button
+            onclick="app.switchTab('dashboard')"
+            class="text-slate-400 hover:text-white flex items-center space-x-1 text-sm font-medium"
+          >
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Back to Dashboard</span>
+          </button>
+          <h3
+            id="setup-range-title"
+            class="text-sm font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full"
+          >
+            Range: 1 – 10
+          </h3>
+        </div>
+
+        <div
+          class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6"
+        >
+          <div>
+            <h2 class="text-2xl font-extrabold mb-1 text-white">
+              Step 2 — Configure Practice
+            </h2>
+            <p class="text-slate-400 text-sm">
+              Customize your practice mode, question count, and difficulty.
+            </p>
+          </div>
+
+          <!-- Practice Mode -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-2"
+              >Practice Mode</label
+            >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label
+                class="flex items-start space-x-3 p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-blue-500 rounded-2xl cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="practice-mode"
+                  value="learn"
+                  class="mt-1 text-blue-600 focus:ring-blue-500"
+                />
+                <div>
+                  <span class="font-bold text-sm block text-white"
+                    >Learn Mode</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    >Instant feedback & mental math shortcuts.</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-start space-x-3 p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-blue-500 rounded-2xl cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="practice-mode"
+                  value="practice"
+                  checked
+                  class="mt-1 text-blue-600 focus:ring-blue-500"
+                />
+                <div>
+                  <span class="font-bold text-sm block text-white"
+                    >Practice Mode</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    >Answer without interruptions.</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-start space-x-3 p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-blue-500 rounded-2xl cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="practice-mode"
+                  value="timed"
+                  class="mt-1 text-blue-600 focus:ring-blue-500"
+                />
+                <div>
+                  <span class="font-bold text-sm block text-white"
+                    >Timed Challenge</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    >Race against the countdown timer.</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-start space-x-3 p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-blue-500 rounded-2xl cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="practice-mode"
+                  value="exam"
+                  class="mt-1 text-blue-600 focus:ring-blue-500"
+                />
+                <div>
+                  <span class="font-bold text-sm block text-white"
+                    >Exam Mode</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    >Results shown only at the end.</span
+                  >
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Number of Questions -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-2"
+              >Number of Questions</label
+            >
+            <div class="grid grid-cols-5 gap-2">
+              <button
+                type="button"
+                onclick="app.setQuestionCount(10)"
+                class="q-count-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm font-bold hover:border-blue-500 transition text-slate-300"
+                data-count="10"
+              >
+                10
+              </button>
+              <button
+                type="button"
+                onclick="app.setQuestionCount(20)"
+                class="q-count-btn py-2.5 rounded-xl border border-blue-500 bg-blue-600/20 text-blue-400 text-sm font-bold transition"
+                data-count="20"
+              >
+                20
+              </button>
+              <button
+                type="button"
+                onclick="app.setQuestionCount(30)"
+                class="q-count-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm font-bold hover:border-blue-500 transition text-slate-300"
+                data-count="30"
+              >
+                30
+              </button>
+              <button
+                type="button"
+                onclick="app.setQuestionCount(50)"
+                class="q-count-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm font-bold hover:border-blue-500 transition text-slate-300"
+                data-count="50"
+              >
+                50
+              </button>
+              <button
+                type="button"
+                onclick="app.setQuestionCount(999)"
+                class="q-count-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm font-bold hover:border-blue-500 transition text-slate-300"
+                data-count="999"
+              >
+                ∞ Unl.
+              </button>
+            </div>
+          </div>
+
+          <!-- Difficulty (Multipliers) -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-2"
+              >Difficulty (Multiplier Range)</label
+            >
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button
+                type="button"
+                onclick="app.setDifficulty('easy')"
+                class="diff-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-xs font-bold transition text-slate-300"
+                data-diff="easy"
+              >
+                Easy (1–5)
+              </button>
+              <button
+                type="button"
+                onclick="app.setDifficulty('medium')"
+                class="diff-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-xs font-bold transition text-slate-300"
+                data-diff="medium"
+              >
+                Medium (6–10)
+              </button>
+              <button
+                type="button"
+                onclick="app.setDifficulty('hard')"
+                class="diff-btn py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-xs font-bold transition text-slate-300"
+                data-diff="hard"
+              >
+                Hard (11–20)
+              </button>
+              <button
+                type="button"
+                onclick="app.setDifficulty('mixed')"
+                class="diff-btn py-2.5 rounded-xl border border-blue-500 bg-blue-600/20 text-blue-400 text-xs font-bold transition"
+                data-diff="mixed"
+              >
+                Mixed (1–20)
+              </button>
+            </div>
+          </div>
+
+          <!-- Additional Toggles -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800/80"
+          >
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                id="setting-timer"
+                checked
+                class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 bg-slate-950 border-slate-800"
+              />
+              <span class="text-sm text-slate-300">Enable Countdown Timer</span>
+            </label>
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                id="setting-sound"
+                checked
+                class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 bg-slate-950 border-slate-800"
+              />
+              <span class="text-sm text-slate-300">Enable Sound Effects</span>
+            </label>
+          </div>
+
+          <button
+            onclick="app.startTest()"
+            class="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white font-bold py-4 rounded-xl transition shadow-lg flex items-center justify-center space-x-2 text-lg"
+          >
+            <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+            <span>Start Test Now</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="tab-test" class="hidden tab-content max-w-2xl mx-auto space-y-6">
+        <!-- Test Header -->
+        <div
+          class="bg-cardBg border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-md"
+        >
+          <div class="flex items-center space-x-3">
+            <button
+              onclick="app.exitTest()"
+              class="p-2 hover:bg-slate-900 rounded-xl text-slate-400 hover:text-white transition"
+              title="Exit Test"
+            >
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div>
+              <span
+                id="test-progress-text"
+                class="text-xs font-semibold text-blue-400"
+                >Question 1 of 20</span
+              >
+              <div
+                class="w-32 sm:w-48 bg-slate-950 h-2 rounded-full mt-1 overflow-hidden"
+              >
+                <div
+                  id="test-progress-bar"
+                  class="bg-gradient-to-r from-blue-500 to-violet-500 h-full w-0 transition-all duration-300"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div
+              id="test-timer-container"
+              class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800/80 text-amber-400 font-bold text-sm"
+            >
+              <i data-lucide="timer" class="w-4 h-4"></i>
+              <span id="test-timer">00:00</span>
+            </div>
+            <div
+              class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800/80 text-emerald-400 font-bold text-sm"
+            >
+              <i data-lucide="zap" class="w-4 h-4 fill-emerald-400"></i>
+              <span id="test-score">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Card -->
+        <div
+          class="bg-cardBg border border-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-8 relative overflow-hidden"
+        >
+          <!-- Streak Badge Floating -->
+          <div
+            id="test-streak-badge"
+            class="absolute top-4 right-4 bg-orange-500/10 text-orange-400 border border-orange-500/20 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1 hidden"
+          >
+            <i data-lucide="flame" class="w-3.5 h-3.5 fill-orange-400"></i>
+            <span id="test-streak-count">Streak x1</span>
+          </div>
+
+          <div class="py-4">
+            <p
+              class="text-slate-400 text-sm uppercase tracking-widest font-semibold mb-3"
+            >
+              Solve the expression
+            </p>
+            <div
+              id="question-display"
+              class="text-5xl sm:text-7xl font-black tracking-wider text-white"
+            >
+              19 × 9 = ?
+            </div>
+          </div>
+
+          <!-- Answer Input & Auto-Submit UI (No Submit Button) -->
+          <div class="max-w-md mx-auto space-y-4">
+            <div class="relative">
+              <input
+                type="number"
+                id="answer-input"
+                autocomplete="off"
+                autofocus
+                placeholder="Type correct answer..."
+                class="w-full bg-slate-950 border-2 border-slate-800 focus:border-blue-500 rounded-2xl px-6 py-4 text-center text-3xl font-extrabold text-white placeholder:text-slate-600 focus:outline-none transition shadow-inner"
+              />
+            </div>
+            <div>
+              <button
+                type="button"
+                id="next-btn"
+                onclick="app.nextQuestion()"
+                class="hidden w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg text-lg flex items-center justify-center space-x-2"
+              >
+                <span>Next Question (Press Enter)</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Feedback Banner -->
+          <div
+            id="feedback-banner"
+            class="hidden rounded-2xl p-4 text-left transition-all animate-fadeIn"
+          >
+            <div class="flex items-start space-x-3">
+              <div id="feedback-icon" class="p-2 rounded-xl"></div>
+              <div class="flex-1">
+                <h4 id="feedback-title" class="font-bold text-base"></h4>
+                <p id="feedback-desc" class="text-slate-300 text-sm mt-1"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="tab-results"
+        class="hidden tab-content max-w-3xl mx-auto space-y-6"
+      >
+        <div
+          class="bg-cardBg border border-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-6"
+        >
+          <div
+            class="w-20 h-20 bg-gradient-to-tr from-blue-600 to-violet-600 rounded-3xl mx-auto flex items-center justify-center glow-blue"
+          >
+            <i data-lucide="trophy" class="w-10 h-10 text-white"></i>
+          </div>
+
+          <div>
+            <span
+              id="results-tier-badge"
+              class="bg-blue-500/10 text-blue-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider border border-blue-500/20"
+              >Math Master</span
+            >
+            <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 text-white">
+              Practice Complete!
+            </h2>
+            <p id="results-subtitle" class="text-slate-400 text-sm mt-1">
+              Here is your detailed performance report.
+            </p>
+          </div>
+
+          <!-- Score Highlight -->
+          <div
+            class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-slate-800/80"
+          >
+            <div>
+              <p class="text-slate-400 text-xs">Final Score</p>
+              <p id="res-score" class="text-3xl font-black text-blue-400 mt-1">
+                0
+              </p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-xs">Accuracy</p>
+              <p
+                id="res-accuracy"
+                class="text-3xl font-black text-emerald-400 mt-1"
+              >
+                0%
+              </p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-xs">Correct / Total</p>
+              <p
+                id="res-counts"
+                class="text-3xl font-black text-slate-100 mt-1"
+              >
+                0 / 0
+              </p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-xs">Time Taken</p>
+              <p id="res-time" class="text-3xl font-black text-violet-400 mt-1">
+                0s
+              </p>
+            </div>
+          </div>
+
+          <!-- Detailed Stats Breakdown -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+            <div
+              class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between"
+            >
+              <span class="text-slate-400 text-sm"
+                >Average Time per Question</span
+              >
+              <span id="res-avg-time" class="font-bold text-slate-200"
+                >0.0s</span
+              >
+            </div>
+            <div
+              class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between"
+            >
+              <span class="text-slate-400 text-sm">Longest Correct Streak</span>
+              <span id="res-streak" class="font-bold text-orange-400">0</span>
+            </div>
+            <div
+              class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between"
+            >
+              <span class="text-slate-400 text-sm">Fastest Correct Answer</span>
+              <span id="res-fastest" class="font-bold text-emerald-400"
+                >0.0s</span
+              >
+            </div>
+            <div
+              class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between"
+            >
+              <span class="text-slate-400 text-sm">XP Earned</span>
+              <span id="res-xp" class="font-bold text-amber-400">+0 XP</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-3 pt-4">
+            <button
+              onclick="app.repeatTest()"
+              class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center space-x-2"
+            >
+              <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+              <span>Practice Again</span>
+            </button>
+            <button
+              onclick="app.startWeakTablesPractice()"
+              class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center space-x-2"
+            >
+              <i data-lucide="target" class="w-4 h-4"></i>
+              <span>Adaptive Booster</span>
+            </button>
+            <button
+              onclick="app.switchTab('mistakes')"
+              id="review-mistakes-btn"
+              class="hidden flex-1 bg-rose-600 hover:bg-rose-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center space-x-2"
+            >
+              <i data-lucide="book-marked" class="w-4 h-4"></i>
+              <span>Review Mistakes</span>
+            </button>
+            <button
+              onclick="app.switchTab('dashboard')"
+              class="flex-1 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2"
+            >
+              <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+              <span>Dashboard</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-learn" class="hidden tab-content space-y-6">
+        <div
+          class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">
+              Table Learning Arena
+            </h2>
+            <p class="text-slate-400 text-sm">
+              Explore and memorize multiplication tables from 1 to 30.
+            </p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <label class="text-sm font-semibold text-slate-300"
+              >Select Table:</label
+            >
+            <select
+              id="learn-table-select"
+              onchange="app.renderLearnTable()"
+              class="bg-slate-950 border border-slate-800 text-slate-100 font-bold rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500"
+            >
+              <!-- Populated via JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Main Table View -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 lg:col-span-2 space-y-4 shadow-md"
+          >
+            <div
+              class="flex items-center justify-between pb-4 border-b border-slate-800/80"
+            >
+              <h3
+                id="learn-table-title"
+                class="text-xl font-bold text-blue-400"
+              >
+                Multiplication Table of 19
+              </h3>
+              <button
+                onclick="app.toggleAnswersVisibility()"
+                id="toggle-answers-btn"
+                class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5"
+              >
+                <i data-lucide="eye-off" class="w-4 h-4"></i>
+                <span id="toggle-answers-text">Hide Answers</span>
+              </button>
+            </div>
+
+            <div
+              id="learn-table-grid"
+              class="grid grid-cols-1 sm:grid-cols-2 gap-3"
+            >
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <!-- Learning Shortcuts & Mental Math Tips -->
+          <div class="space-y-6">
+            <div
+              class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 space-y-4 shadow-md"
+            >
+              <div class="flex items-center space-x-3 text-amber-400">
+                <i data-lucide="zap" class="w-6 h-6"></i>
+                <h3 class="font-bold text-lg text-white">
+                  Quick Mental Math Shortcut
+                </h3>
+              </div>
+              <div
+                id="learn-shortcut-box"
+                class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 text-sm text-slate-300 space-y-2"
+              >
+                <p class="font-bold text-blue-400">
+                  Distributive Property (Breakdown)
+                </p>
+                <p>
+                  To multiply <span class="text-white font-bold">19 × 7</span>:
+                </p>
+                <p>
+                  Think:
+                  <span class="text-emerald-400 font-mono"
+                    >(20 × 7) − (1 × 7)</span
+                  >
+                </p>
+                <p>= <span class="text-white font-bold">140 − 7 = 133</span></p>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-blue-950/30 via-cardBg to-cardBg border border-blue-900/40 rounded-3xl p-6 space-y-4 shadow-md"
+            >
+              <h3 class="font-bold text-lg text-white">Practice This Table</h3>
+              <p class="text-slate-400 text-sm">
+                Ready to test your memory on this specific table?
+              </p>
+              <button
+                onclick="app.startSpecificTablePractice()"
+                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2"
+              >
+                <span>Practice This Table</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="tab-speed"
+        class="hidden tab-content max-w-2xl mx-auto space-y-6"
+      >
+        <div
+          class="bg-cardBg border border-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-8"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-tr from-orange-600 to-amber-600 rounded-2xl mx-auto flex items-center justify-center glow-violet"
+          >
+            <i data-lucide="gauge" class="w-8 h-8 text-white"></i>
+          </div>
+
+          <div>
+            <h2 class="text-3xl font-extrabold mb-2 text-white">
+              Speed Challenge Arena
+            </h2>
+            <p class="text-slate-400 text-sm">
+              Test your raw calculation speed. Answer as many questions as you
+              can before time expires!
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 max-w-md mx-auto">
+            <button
+              onclick="app.startSpeedChallenge(30)"
+              class="bg-slate-950 border-2 border-orange-500/50 hover:border-orange-500 rounded-2xl p-4 transition group shadow"
+            >
+              <span class="text-2xl font-black text-orange-400 block">30s</span>
+              <span class="text-xs text-slate-400">Sprint</span>
+            </button>
+            <button
+              onclick="app.startSpeedChallenge(60)"
+              class="bg-slate-950 border-2 border-slate-800 hover:border-orange-500 rounded-2xl p-4 transition group shadow"
+            >
+              <span class="text-2xl font-black text-blue-400 block">60s</span>
+              <span class="text-xs text-slate-400">Standard</span>
+            </button>
+            <button
+              onclick="app.startSpeedChallenge(120)"
+              class="bg-slate-950 border-2 border-slate-800 hover:border-orange-500 rounded-2xl p-4 transition group shadow"
+            >
+              <span class="text-2xl font-black text-violet-400 block"
+                >120s</span
+              >
+              <span class="text-xs text-slate-400">Marathon</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="tab-mistakes"
+        class="hidden tab-content max-w-3xl mx-auto space-y-6"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Mistake Notebook</h2>
+            <p class="text-slate-400 text-sm">
+              Review questions you missed and master them.
+            </p>
+          </div>
+          <button
+            onclick="app.clearMistakes()"
+            class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-rose-400 text-xs font-semibold px-4 py-2 rounded-xl transition"
+          >
+            Clear Notebook
+          </button>
+        </div>
+
+        <div id="mistakes-container" class="space-y-3">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div id="tab-tips" class="hidden tab-content max-w-4xl mx-auto space-y-6">
+        <div>
+          <h2 class="text-2xl font-extrabold text-white">
+            Mental Math Mastery Tips
+          </h2>
+          <p class="text-slate-400 text-sm">
+            Professional shortcuts to calculate multiplication in milliseconds.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Tip 1 -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 space-y-3 shadow-md"
+          >
+            <div class="flex items-center space-x-3 text-blue-400">
+              <i data-lucide="lightbulb" class="w-6 h-6"></i>
+              <h3 class="font-bold text-lg text-white">Multiplying by 9</h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              Multiply the number by 10, then subtract the number itself.
+            </p>
+            <div
+              class="bg-slate-950/80 rounded-xl p-3 text-xs font-mono text-emerald-400 border border-slate-800/80"
+            >
+              Example: 19 × 9 = (19 × 10) − 19 = 190 − 19 = 171
+            </div>
+          </div>
+
+          <!-- Tip 2 -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 space-y-3 shadow-md"
+          >
+            <div class="flex items-center space-x-3 text-violet-400">
+              <i data-lucide="lightbulb" class="w-6 h-6"></i>
+              <h3 class="font-bold text-lg text-white">Multiplying by 11</h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              For two-digit numbers (ab × 11), separate digits and insert their
+              sum (a + b) in the middle.
+            </p>
+            <div
+              class="bg-slate-950/80 rounded-xl p-3 text-xs font-mono text-emerald-400 border border-slate-800/80"
+            >
+              Example: 14 × 11 → (1)(1+4)(4) = 154
+            </div>
+          </div>
+
+          <!-- Tip 3 -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 space-y-3 shadow-md"
+          >
+            <div class="flex items-center space-x-3 text-amber-400">
+              <i data-lucide="lightbulb" class="w-6 h-6"></i>
+              <h3 class="font-bold text-lg text-white">Multiplying by 25</h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              Multiply by 100, then divide by 4.
+            </p>
+            <div
+              class="bg-slate-950/80 rounded-xl p-3 text-xs font-mono text-emerald-400 border border-slate-800/80"
+            >
+              Example: 24 × 25 = (24 × 100) ÷ 4 = 2400 ÷ 4 = 600
+            </div>
+          </div>
+
+          <!-- Tip 4 -->
+          <div
+            class="bg-cardBg border border-slate-800/80 rounded-3xl p-6 space-y-3 shadow-md"
+          >
+            <div class="flex items-center space-x-3 text-emerald-400">
+              <i data-lucide="lightbulb" class="w-6 h-6"></i>
+              <h3 class="font-bold text-lg text-white">
+                Splitting Numbers (Distributive)
+              </h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              Break hard multipliers into friendly tens and units.
+            </p>
+            <div
+              class="bg-slate-950/80 rounded-xl p-3 text-xs font-mono text-emerald-400 border border-slate-800/80"
+            >
+              Example: 18 × 7 = (20 × 7) − (2 × 7) = 140 − 14 = 126
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="mt-auto border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-md py-8 text-slate-400 text-xs"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <!-- Left: Branding & Tagline -->
+        <div class="flex flex-col items-center md:items-start gap-1">
+          <div
+            class="flex items-center gap-2 font-semibold text-slate-200 text-sm"
+          >
+            <span
+              class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+            ></span>
+            <span>MathMaster</span>
+          </div>
+          <p class="text-slate-500">
+            Tables Training Arena — Practice Smart. Calculate Fast.
+          </p>
+        </div>
+
+        <!-- Center/Right: Developer Profile & Links -->
+        <div class="flex items-center gap-4">
+          <span class="text-slate-600">|</span>
+          <a
+            href="https://github.com/ranjan-builds"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/50 transition-all duration-200"
+          >
+            <!-- GitHub Icon -->
+            <svg
+              class="w-4 h-4 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            <span
+              >Built by
+              <strong class="font-medium text-slate-200"
+                >ranjan-builds</strong
+              ></span
+            >
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Divider & Copyright -->
+      <div
+        class="mt-6 pt-4 border-t border-slate-800/40 text-center text-slate-600"
+      >
+        &copy; 2026 MathMaster. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
